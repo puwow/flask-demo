@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Flask-Demo</title>
+    <script src="/static/jquery.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <input type="text" placeholder="GIT地址" id="git_path"></input>
+      <button type="button" id="start">启动</button>
+    </div>
+  <script type="text/javascript">
+    $(function(){
+      $("#start").on("click", function(event){
+        var git_path = $("#git_path").val();
+        var data = {"git_path":git_path}
+        $.post({
+          url:'/git/clone',
+          dataType:"json",
+          data:data,
+          success:function( res ) {
+            alert( res.message );
+          },
+          error:function(){
+            alert("通讯异常");
+          }
+        });
+      });
+    })
+  </script>
+  </body>
+</html>
